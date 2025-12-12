@@ -7,8 +7,8 @@ import { CustomError } from "../../../libs/errors/custom-error";
 export class PaymentService {
     private paymentRepository: PaymentRepository;
 
-    constructor() {
-        this.paymentRepository = new PaymentRepository();
+    constructor(paymentRepository: PaymentRepository = new PaymentRepository()) {
+        this.paymentRepository = paymentRepository;
     }
 
     async createPayment(dto: CreatePaymentDto): Promise<Payment> {
