@@ -13,7 +13,7 @@ export class PaymentRepository {
         return this.payments.find(payment => payment.id === id) || null;
     }
 
-    findOneAndUpdate(id: string, status: PaymentStatus, failureReason?: string): Payment | null {
+    updateStatus(id: string, status: PaymentStatus, failureReason?: string): Payment | null {
         const payment = this.findById(id);
         if (!payment) {
             return null;

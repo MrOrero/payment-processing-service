@@ -35,4 +35,49 @@ export class PaymentController {
             next(error);
         }
     };
+
+    getPaymentById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(formatValidationError(errors.array()));
+            }
+
+            const { id } = req.params;
+            const payment = await this.paymentService.getPaymentById(id);
+
+            res.status(200).json({
+                success: true,
+                data: payment
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    updatePaymentStatus = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return next(formatValidationError(errors.array()));
+            }
+
+            const { id } = req.params;
+            const { status, failureReason } = req.body;
+
+            const payment = await this.paymentService.updatePaymentStatus(
+                id,
+                status,
+                failureReason
+            );
+
+            res.status(200).json({
+                success: true,
+                message: "Payment status updated successfully",
+                data: payment
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
 }

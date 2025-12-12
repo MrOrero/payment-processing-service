@@ -1,4 +1,5 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
+import { PaymentStatus } from "../../../libs/constants";
 
 export const createPaymentValidation = () => [
     body("amount")
@@ -30,5 +31,33 @@ export const createPaymentValidation = () => [
         .withMessage("Customer name must be a string")
         .notEmpty()
         .withMessage("Customer name cannot be empty")
+        .trim()
+];
+
+export const getPaymentByIdValidation = () => [
+    param("id")
+        .notEmpty()
+        .withMessage("Payment ID is required")
+        .isString()
+        .withMessage("Payment ID must be a string")
+];
+
+export const updatePaymentStatusValidation = () => [
+    param("id")
+        .notEmpty()
+        .withMessage("Payment ID is required")
+        .isString()
+        .withMessage("Payment ID must be a string"),
+    
+    body("status")
+        .notEmpty()
+        .withMessage("Status is required")
+        .isIn(Object.values(PaymentStatus))
+        .withMessage("Invalid payment status, status must be one of: " + Object.values(PaymentStatus).join(", ")),
+    
+    body("failureReason")
+        .optional()
+        .isString()
+        .withMessage("Failure reason must be a string")
         .trim()
 ];
