@@ -1,4 +1,5 @@
 import { PaymentStatus } from "../../../libs/constants";
+import { nanoid } from "nanoid";
 
 export class Payment {
     id: string;
@@ -29,7 +30,7 @@ export class Payment {
     }
 
     private generateId(): string {
-        return `${Date.now()}-${Math.random().toString(36).substring(2, 9).toUpperCase()}`;
+        return nanoid(10);
     }
 
     updateStatus(status: PaymentStatus, failureReason?: string): void {

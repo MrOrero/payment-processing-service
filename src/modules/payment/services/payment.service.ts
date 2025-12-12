@@ -32,13 +32,13 @@ export class PaymentService {
         const delay = Math.floor(Math.random() * 2000) + 1000;
         await new Promise(resolve => setTimeout(resolve, delay));
 
-        const statuses = [
+        const possibleStatuses = [
             PaymentStatus.COMPLETED,
             PaymentStatus.FAILED,
-            PaymentStatus.PROCESSING
+            PaymentStatus.PENDING
         ];
         
-        const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+        const randomStatus = possibleStatuses[Math.floor(Math.random() * possibleStatuses.length)];
         
         const failureReasons = [
             "Insufficient funds",
