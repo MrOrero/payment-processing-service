@@ -35,20 +35,22 @@ npm -v
         npm install
         ```
 
-2. Start in watch mode with automatic reloads:
+2. Start the server using either development watch mode **or** the compiled build:
 
-        ```shell
-        npm run start:dev
-        ```
+     - Watch mode (auto reload):
 
-3. Build the TypeScript sources and start the compiled output:
+         ```shell
+         npm run start:dev
+         ```
 
-        ```shell
-        npm run build
-        npm start
-        ```
+     - Build & run the compiled output:
 
-4. Visit `http://localhost:3000/docs` (or your chosen port) for the interactive Swagger UI.
+         ```shell
+         npm run build
+         npm start
+         ```
+
+3. Visit `http://localhost:3000/docs` (or your chosen port) for the interactive Swagger UI.
 
 ## Testing
 
